@@ -1,7 +1,8 @@
 export interface User {
     id: number;
+    name: string;
     email: string;
-    password_hash : string;
-    display_picture : string
-
+    password_hash: string;
+    role: 'reviewer' | 'submitter';
+    display_picture: string | null;
 }
