@@ -7,10 +7,10 @@ export const findUserByEmail = async (email: string): Promise<User | null> => {
     return rows[0] || null;
 }
 
-export const createUser = async (email: string, password: string): Promise<User> => {
+export const createUser = async (name: string ,email: string, password: string,role:string): Promise<User> => {
     const salt = await bcrypt.genSalt(10);
     const password_hash = await bcrypt.hash(password, salt);
-    const { rows } = await query("INSERT INTO users (email, password_hash,display_picture) VALUES ($1, $2) RETURNING *", [email, password_hash]);
+    const { rows } = await query("INSERT INTO users (name,email, password_hash,role) VALUES ($1, $2) RETURNING *", [name,email, password_hash,role]);
     return rows[0];
 }
 

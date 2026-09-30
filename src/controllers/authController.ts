@@ -4,7 +4,7 @@ import brcypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
 export const registerUser = async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const {name, email, password,role} = req.body;
     if (!email || !password) {
         return res.status(400).json({ message: "Email and password are required" });
     }
@@ -13,7 +13,7 @@ export const registerUser = async (req: Request, res: Response) => {
         if (existingUser) {
             return res.status(400).json({ message: "User already exists" });
         }
-        const newUser = await userService.createUser(email, password);
+        const newUser = await userService.createUser(name,email, password,role);
         res.status(201).json({ message: "User registered successfully", userId : newUser.id });
     } catch (error) {
         res.status(500).json({ message: "Error registering user" });
