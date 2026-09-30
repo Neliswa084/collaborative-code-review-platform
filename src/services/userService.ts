@@ -16,7 +16,7 @@ export const createUser = async (name: string ,email: string, password: string,r
 
 export const findAllUsers = async (): Promise<User[]> => {
         const { rows } = await query(
-        "SELECT * FROM users ORDER BY applied_at DESC"
+        "SELECT * FROM users ORDER BY created_at DESC"
 
     );
     return rows
