@@ -3,6 +3,7 @@ import dotenv from "dotenv"
 import { testDbConnection } from "./config/database"
 import { initDb } from "./config/initDb"
 import authRoutes from "./routes/authRoutes"
+import projectRoutes from "./routes/projectRoutes"
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ const startServer = async () => {
   app.use(express.json())
 
   app.use('/api/auth', authRoutes)
+  app.use('/api',projectRoutes)
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
   })
