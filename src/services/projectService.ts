@@ -10,6 +10,13 @@ export const createProject = async (appData: NewProject, userId:number): Promise
     return rows[0];
 }
 
+export const findAllProjects = async (): Promise<Project[]> => {
+    const {rows} = await query(
+        "SELECT * FROM projects ORDER BY id"
+    );
+    return rows
+}
+
 
 
 
