@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from "express";
 import jwt from "jsonwebtoken";
-// import {findUserByEmail} from "../service/userService"
+import {findUserByEmail} from "../services/userService"
 import {User} from "../models/user.types"
 
 interface JwtPayload {
@@ -20,9 +20,9 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
             token = req.headers.authorization.split(" ")[1];
             const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JwtPayload;
             console.log(decoded , "decoded token")
-            // const user: User | null = await findUserByEmail(decoded.email);
+            const user: User | null = await findUserByEmail(decoded.email);
 
-            // req.user = user || undefined;
+            req.user = user || undefined;
 
             if (!req.user){
                 return res.status(401).json({ message: "Not authorized, user not found" });
