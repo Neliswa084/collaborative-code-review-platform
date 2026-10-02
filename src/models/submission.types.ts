@@ -9,4 +9,4 @@ export interface Submission {
     updated_at: Date;
 
 }
-export type NewSubmission = Pick<Submission, 'project_id' | 'title' | 'code'>;
+export type NewSubmission = Omit<Submission, 'id' | ' created_at' | ' updated_at'>;

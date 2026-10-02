@@ -1,6 +1,17 @@
 import { query } from "../config/database";
 import { Submission , NewSubmission} from "../models/submission.types";
 
+
+
+    export const createCodeSubmission = async (appData: NewSubmission, userId:number) : Promise<Submission> =>{
+        const {project_id , title , code , status} = appData
+        const {rows} = await query(
+            "INSERT INTO submissions (project_id ,title,code,status,submitter_id ) VALUES ($1 , $2 , $3 , $4 ,$5) RETURNING *",
+            [project_id ,title,code,status,userId]
+        )
+        return rows[0];
+    }
+
 export const findSubmissionsByProject = async (projectId: number): Promise<Submission[]> => {
     const { rows } = await query(
         "SELECT * FROM submissions WHERE project_id = $1 ORDER BY created_at DESC",

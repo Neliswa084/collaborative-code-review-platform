@@ -3,6 +3,17 @@ import { Request , Response } from "express";
 import * as projectService from "../services/projectService"
 import * as submissionService from "../services/submissionService"
 
+
+export const addSubmission = async (req: Request , res: Response) => {
+    try {
+        const newSubmission = await submissionService.createCodeSubmission(req.body , req.user!.id)
+        res.status(201).json(newSubmission)
+    } catch ( error) {
+        console.log( "Application error:" , error)
+        res.status(500).json({message : "Error in creating code submission"});
+    }
+}
+
 export const getSubmissionsByProject = async (req: Request, res: Response) => {
     try {
         const projectId = parseInt(String(req.params.id));

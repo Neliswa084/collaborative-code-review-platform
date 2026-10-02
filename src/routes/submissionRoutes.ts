@@ -1,9 +1,10 @@
 import {Router} from "express";
-import {deleteSubmissionById, getSubmissionById, getSubmissionsByProject, updateStatus} from "../controllers/submissionController"
+import {addSubmission,deleteSubmissionById, getSubmissionById, getSubmissionsByProject, updateStatus} from "../controllers/submissionController"
 
 
 const router = Router();
 
+router.post('/submissions',addSubmission)
 router.get('/projects/:id/submissions', getSubmissionsByProject);
 router.get('/submissions/:id', getSubmissionById);
 router.patch('/submissions/:id/status', updateStatus);
